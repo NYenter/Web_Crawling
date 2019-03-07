@@ -13,7 +13,7 @@ def DownloadImages(url, name):
     
     # Set file path and permissions
     save_path = 'C:/Bakugan_Images/'
-    os.chmod(file_destination, S_IWUSR | S_IRUSR)
+    os.chmod(save_path, S_IWUSR | S_IRUSR)
 
     # Use index to keep track of name
     index = 0
@@ -22,7 +22,7 @@ def DownloadImages(url, name):
         #name_of_file = 'test3'
         completeName = os.path.join(save_path + name[index] + ".png")         
         #test = 'https://bakugan.wiki/wiki/File:Pegatrix_(Ventus_Card)_369_CC_BB.png'
-        image_req = Request(test, headers={'User-Agent': 'Mozilla/5.0'})
+        image_req = Request(image_url, headers={'User-Agent': 'Mozilla/5.0'})
         image_html_info = uReq(image_req).read()
         #image_webpage = image_html_info.decode('utf-8')
         image_page_soup = soup(image_html_info, 'html.parser')
@@ -85,9 +85,8 @@ def MainHtmlParser():
                 f.write(str(card_set_number) + ',' + card_name + ',' + card_type + ',' + faction_type + ',' + offical_image_url + '\n')
     f.close()
 
-    print(image_url_list)
     #Processing
-    #DownloadImages(image_url_list, image_save_name)
+    DownloadImages(image_url_list, image_save_name)
 
 #Processing
 MainHtmlParser()
